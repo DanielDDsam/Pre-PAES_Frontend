@@ -1,0 +1,332 @@
+.sidebar {
+    max-width: 300px;
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    height: 100%;
+    max-height: auto;
+    margin-bottom: 1rem !important;
+    }
+    
+    .sidebar h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 0;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    }
+    
+    .sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    }
+    
+    .sidebar li {
+    margin-bottom: 20px;
+    }
+    .sidebar li .active {
+      border-left: solid  15px rgb(236, 180, 27);
+    }
+    
+    .sidebar a {
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: block;
+    padding: 12px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.165) !important;
+    }
+    .pikachu{
+      width: 100px;
+     
+    }
+
+.content {
+    width: 70%;
+    
+    
+}
+.section-menu{
+    display: flex;
+    justify-content: center;
+    
+    
+    width: 90%;
+    
+  
+}
+.mainMenu {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.container-ensayos{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+    grid-gap: 30px;
+    margin-left: 3rem;
+    margin-top: 30px;
+    padding: 0;
+    margin-bottom: 0.5rem;
+    list-style: none;
+}
+ .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+
+}
+.card{
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    width: 370px;
+    height: 300px;
+  
+
+}
+.cardGame:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+.cardGame{
+  background-image: url(../images/Fondo\ de\ Pantalla\ Escritorio\ PC\ Abstracto\ Moderno\ Degradado\ Negro.png);
+  background-size: cover;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  width: 370px;
+  margin: 0;
+  cursor:pointer;
+}
+.logo{
+    width: 200px;
+    
+}
+.content-logo{
+    display: flex;justify-content: center;align-items: center;
+    margin: 0;
+}
+.modal-wrapper {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 700px;
+    max-height: 50%;
+    overflow-y: auto;
+    margin-bottom: 0 !important;
+    overflow-y: hidden;
+    display: flex;
+    margin: 0 !important;
+
+  
+    
+  }
+ 
+  .modal-dialog {
+    /* position: relative; */
+    /* width: auto; */
+    margin-top:0; 
+    width: 100%;
+    height: 700px;
+    border: none;
+    margin-bottom: 0;
+    display: flex;
+    
+    justify-content: center;
+   
+    max-width: none !important;
+    
+    /* pointer-events: none; */
+}
+
+  .modal-header {
+    display: flex;
+    justify-content: flex-end;
+    width: 100% !important;
+    align-items: center;
+    margin-bottom: 0px;
+    border: none;
+    margin-top: 0;
+    
+
+  }
+  .modal-content {
+    background-color: white;
+    margin-top: 0;
+    color: black;
+    border: none;
+    margin: 0 !important;
+    width: 80% !important;
+    
+    
+    
+  }
+  .modal-body{
+    width: 100% !important;
+    text-align: center;
+    padding: 1px;
+    
+
+  }
+  .modal-bodyText{
+    font-size: 18px;
+    margin-top: 2rem;
+    
+  }
+  .close {
+    font-size: 30px;
+    font-weight: bold;
+    color: #1E1E1E;
+    cursor: pointer;
+    margin: 0;
+  }
+  
+  .close:hover {
+    color: #aaa;
+  }
+  .contentTipPAES{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .motivation-container {
+    background-color: #F8F8F8;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    margin-top: 5% !important;
+    margin: 20px 0;
+    text-align: center;
+    width: 500px;
+  }
+  .container-enunciados {
+    display: flex;
+    justify-content: center;
+  
+  }
+  .enunciados{
+    width: 50%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+  }
+  h4{
+    margin-right: 2rem;
+    padding: 10px;
+    margin-bottom: 0;
+  }
+
+
+  .toggle-button button {
+    background-color: #fff;
+    border: none;
+    position: relative;
+    color: #333;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    margin: 10px;
+    flex: 1;
+  
+ 
+  }
+  
+  .toggle-button button.active {
+    background-color: #333;
+    color: #fff;
+  }
+ 
+  .motivation-text {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .container-universidades {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color:rgb(241, 199, 84) ;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  
+  
+  .container-universidades label {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .container-universidades select,
+  input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 0px;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+  
+  .container-universidades select:focus,
+  input[type="text"]:focus {
+    outline: none;
+    border-color: #0077ff;
+    box-shadow: 0 0 4px rgba(0, 119, 255, 0.4);
+    
+  }
+@media screen and (max-width: 1193px) {
+    /* Establecemos flexbox para que los elementos se muestren en columna */
+    .section-menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    /* Cambiamos el orden de los elementos con flexbox */
+    .sidebar {
+      order: 1;
+      width: 100%;
+  
+    }
+  
+    .content {
+      order: 2;
+      width: 100%;
+    }
+    .card{
+        width: 350px;
+        margin-left: 0.9rem;
+    }
+  }
+  
