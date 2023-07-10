@@ -46,7 +46,7 @@ class LoginPro extends React.Component{
       }
 
     manejadorBoton=()=>{
-        if(estadoCaptcha===true){
+      
         let url = Apiurl + 'api/login/';
         axios.post(url, this.state.form)
             .then(response => {
@@ -107,13 +107,7 @@ class LoginPro extends React.Component{
             
             
         })
-        }else{
-            console.log("error")
-                this.setState({
-                    error : true,
-                    errorMsg : "Por favor acepte el captcha"
-                })
-        }
+   
     }
 
     render(){
@@ -137,14 +131,7 @@ class LoginPro extends React.Component{
                                 <input type="password" name="password" id="passwordL" onChange={this.manejadorChange} placeholder="Contraseña"/>
             
                             </div>
-                            <div className="d-flex justify-content-center recaptcha m-3 ">
-                                <ReCAPTCHA
-                    
-                                sitekey="6LdKsC0jAAAAALU0pKS0cugXGAxqe4aX-RKs9Q-a"
-                                onChange={this.onChange}
-                                />
-            
-                            </div>
+                          
           
                             <button type="button" id="login" className="button" onClick={this.manejadorBoton}>Iniciar Sesión</button>
                             {this.state.error === true &&
