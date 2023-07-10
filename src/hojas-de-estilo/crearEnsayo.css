@@ -64,6 +64,14 @@
 .form-control{
     width: 100%;
     padding: 10px;
+  
+}
+
+td{
+  cursor: pointer;
+}
+textarea{
+  height: 150px;
 }
 
 .form{
@@ -218,4 +226,8 @@
   .arrow-forward-icon{
     color: rgb(236, 180, 27);
     font-weight: bold !important;
+  }
+
+  .botonQ{
+    background-color: #ffc107;
   }

@@ -25,8 +25,10 @@ import axios from "axios";
 import regression from 'regression';
 import { parse } from "@fortawesome/fontawesome-svg-core";
 import StarIcon from '@mui/icons-material/Star';
+import { Apiurl } from "../../Services/apirest";
 
-const UrlSubmitAnswers  = "http://127.0.0.1:8000/submit_answers/";
+
+const UrlSubmitAnswers  = Apiurl +"submit_answers/";
 
 const cookies = new Cookies();
 function Ensayo(props) {
@@ -68,6 +70,7 @@ function Ensayo(props) {
       props.ensayo.length * 60 * 2
   );
   const [areDisabled, setAreDisabled] = useState(false);
+  const [new_id, setNew_id] = useState(JSON.parse(localStorage.getItem("new_id")) ||[]);
   const [fechaActual, setFechaActual] = useState("")
   const [selectedAnswers, setSelectedAnswers] = useState(
   JSON.parse(localStorage.getItem("selectedAnswers"))||{});
@@ -75,7 +78,7 @@ function Ensayo(props) {
   const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}\]";
   const ecuacionRegex = /\[(.*?)\]/g; // Expresión regular para detectar partes de la cadena que contienen ecuaciones
   const [tiempoUsuario, setTiempoUsuario] = useState(0);
-
+  const [showPopup, setShowPopup] = useState(false);
 
 
   const [respuestaId, setRespuestaId] = useState([]);
@@ -203,31 +206,41 @@ function Ensayo(props) {
   }
   
   async function finalizarEnsayo(){
+    const allQuestionsAnswered = Object.keys(selectedAnswers).length === ensayo.length;
+  if (!allQuestionsAnswered) {
+    setShowPopup(true);
+  } else {
+    // Aquí va el código para manejar el envío del formulario cuando todas las preguntas han sido respondidas
+  
     setTiempoUsuario(getFormatedTime(props.ensayo.length * 60 * 2 - tiempoRestante));
   
     let tiempoUser=props.ensayo.length * 60 * 2 - tiempoRestante;
     cambiarEstado();
     setIsFinished(true);
-    const essayId = parseInt(localStorage.getItem("new_id")) ; // Reemplaza con el ID del ensayo
-    console.log(essayId)
+ 
+    console.log(new_id)
+   
     const token = localStorage.getItem("token");
-    console.log("hola")
+    console.log(respuestaId)
     try {
       const response = await axios.post(UrlSubmitAnswers, {
         answer_ids: respuestaId, // [16,11,null,7,3]
-        user_essay_id: essayId,
+        user_essay_id: new_id,
         time_essay: tiempoUser.toString()
+    
+
         //question_ids: preguntaId, [1,2,3,4,5]
       }, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
+      console.log(props.ensayo.length)
       console.log(response.data);
     } catch (error) {
       console.log(error);
     }
-    
+  } 
   }
   function handleClickNav(j){
     setPreguntaActual(j);
@@ -334,7 +347,7 @@ function Ensayo(props) {
                   <button
                     onClick={() => (window.location.href = "/menu",localStorage.removeItem("ensayo"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntuacion"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("selectedAnswers"),localStorage.removeItem("preguntaActual"),localStorage.removeItem("respuesta"),localStorage.removeItem("tituloPregunta"), localStorage.removeItem("tiempoRestante") )}
                     type="button"
-                    className="botonQ btn btn-outline-dark btn-lg m-2"
+                    className="btn btn-outline-dark btn-lg m-2"
                     id="bot"
                   >
                     Continuar
@@ -354,7 +367,7 @@ function Ensayo(props) {
               </div>
             </div>
 
-            <div class="accordion mt-4" id="accordionExample">
+            <div className="accordion mt-4" id="accordionExample">
               <div>
                 {ensayo.map((item, j) => (
                   <Accordion
@@ -381,8 +394,8 @@ function Ensayo(props) {
                         <Typography {...markCorrectOrNot(item, i, j)}>
                           <label
                             className="contenedor-alternativa-pregunta-respuesta "
-                            disableRipple
-                            key={respuesta.label}
+                     
+                            key={respuesta.id}
                           >
                             <b>{String.fromCharCode(65 + i) + " . "}</b>
                            {replace((respuesta.label).replace('Â', ''), ecuacionRegex, (match, i) => {
@@ -410,8 +423,7 @@ function Ensayo(props) {
               </div>
             </div>
           </div>
-
-          
+         
         </main>
       </div>
     );
@@ -428,27 +440,38 @@ function Ensayo(props) {
   */}
       
       <div className="contenedor-principal position-relative ">
-      <h3  className="titleEnsayo" style={{color:"#4e5457", fontWeight:"500",marginTop:"2rem"}}>{props.titleEnsayo}</h3>
+      <div className="row">
+        <div className="col ">
+          <h3  className="titleEnsayo" style={{color:"#4e5457", fontWeight:"500",marginTop:"2rem"}}>{props.titleEnsayo}</h3>
+        </div>
+        <div
+        className={`timer-container col-3-md m-3  ${isHidden ? 'hide' : ''}`}
+        onClick={handleClick}
+      >
+        {isHidden ? (
+          <AccessTimeIcon  fontSize="large" style={{color:"white"}}/>
+        ) : (
+          <h3 className="tiempo text-center mt-2">
+          {getFormatedTime(tiempoRestante)}
+        </h3>
+        )}
+      </div>
+      </div>
+      
       {preguntaActual  < (props.ensayo.length)  && (
         <div className="contenedor-pregunta">
           <div className="row ">
-            <div className="col-md mt-3">
-              <h2>
+            <div className="col-md-11 mt-3">
+              <h3>
                 Pregunta {preguntaActual + 1} de {props.ensayo.length}
-              </h2>
+              </h3>
             </div>
-            <div
-      className={`timer-container col-7-md m-3  ${isHidden ? 'hide' : ''}`}
-      onClick={handleClick}
-    >
-      {isHidden ? (
-        <AccessTimeIcon  fontSize="large" style={{color:"white"}}/>
-      ) : (
-         <h3 className="tiempo text-center mt-2">
-        {getFormatedTime(tiempoRestante)}
-      </h3>
-      )}
-    </div>
+            <div className="col-md-1">
+              <h6 style={{color:"rgb(78, 84, 87)"}}>
+                #{ensayo[preguntaActual].id}
+              </h6>
+            </div>
+            
            
           </div>
           
@@ -475,8 +498,8 @@ function Ensayo(props) {
             type="button"
             className={`contenedor-alternativa-pregunta ${respuesta.label === selectedAnswers[preguntaActual] ? 'selected' : ''}`}
             disabled={areDisabled}
-            disableRipple
-            key={<InlineMath math={respuesta.label} />}
+         
+            key={respuesta.id}
             onClick={(e) => {
               setSelectedAnswers(prevAnswers => ({
                 ...prevAnswers,
@@ -499,8 +522,8 @@ function Ensayo(props) {
           </button>
           ))}
           <div className="sumaResta">
-            <a class="arrow left" onClick={retrocederPregunta}></a>
-            <a class="arrow right" onClick={siguientePregunta}></a>
+            <a className="arrow left" onClick={retrocederPregunta}></a>
+            <a className="arrow right" onClick={siguientePregunta}></a>
             
   
      
@@ -519,11 +542,21 @@ function Ensayo(props) {
         <button onClick={finalizarEnsayo}className="btnVolverTerminar btn btn-lg btn-dark">Si, quiero terminar el ensayo</button>
       </div>
     </div>
+    
+  )}
+  {showPopup && (
+    <div className="popup">
+      <div className="popup-content">
+        <h1 style={{fontWeight:"bold"}}>Ups!! </h1>
+        <p>Debe responder a todas las preguntas para terminar el ensayo.</p>
+        <button className="btn btn-lg btn-warning" onClick={() => setShowPopup(false)}>Cerrar</button>
+      </div>
+    </div>
   )}
   <div className="navigation-container">
       <div className="navigation-items">
         {ensayo.map((item,j) => (
-          <div className= {`navigation-item ${j === preguntaActual ? 'selected-nav' : ''} ${selectedAnswers[j] ? 'answered' : ''} `} key={item}  onClick={() =>handleClickNav(j)}>
+          <div className= {`navigation-item ${j === preguntaActual ? 'selected-nav' : ''} ${selectedAnswers[j] ? 'answered' : ''} `} key={j}  onClick={() =>handleClickNav(j)}>
             {j+1}
           </div>
         ))}

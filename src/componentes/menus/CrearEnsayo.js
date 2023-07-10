@@ -65,7 +65,7 @@ function CrearEnsayo() {
     // seteamos los datos en el ensayoSelected.
     setensayoSelected((current) => ({
       ...current,
-      [id]: { name, checked },
+      [id]: { id, name, checked },
     }));
   }
   const handleCantidadPreguntasChange = (e) => {
@@ -80,23 +80,37 @@ function CrearEnsayo() {
      });
   } 
   const mostrarData = (e) => {
-    e.preventDefault();
-    setFormData({ cantidadPreguntas, ensayoSelected });
-  
-    // Verificar si la información ya está guardada en el almacenamiento local
-    const formData = JSON.parse(localStorage.getItem('formData'));
-    if (formData && formData.cantidadPreguntas) {
-      // La información ya está disponible, redirigir a la URL deseada
-      window.location.href = "/Menu/EnsayoCustom";
-    } else {
-      // La información aún no está disponible, establecer una bandera y esperar
-      localStorage.setItem('dataReady', 'false');
-      // Aquí puedes mostrar algún indicador de carga para informar al usuario que la información se está procesando
-  
-      // Una vez que la información se haya guardado, establecer la bandera en true y redirigir
-      localStorage.setItem('dataReady', 'true');
-      window.location.href = "/Menu/EnsayoCustom";
-    }
+      e.preventDefault();
+      let seleccionados = 0;
+      if(Object.keys(ensayoSelected).length >1){
+        for(let i in ensayoSelected){
+          if(ensayoSelected[i].checked === true){
+            seleccionados++;
+          }}
+          if(cantidadPreguntas && seleccionados >1){
+            setFormData({ cantidadPreguntas, ensayoSelected });
+        
+            // Verificar si la información ya está guardada en el almacenamiento local
+            const formData = JSON.parse(localStorage.getItem('formData'));
+            if (formData && formData.cantidadPreguntas) {
+              // La información ya está disponible, redirigir a la URL deseada
+              window.location.href = "/Menu/EnsayoCustom";
+            } else {
+              // La información aún no está disponible, establecer una bandera y esperar
+              localStorage.setItem('dataReady', 'false');
+              // Aquí puedes mostrar algún indicador de carga para informar al usuario que la información se está procesando
+          
+              // Una vez que la información se haya guardado, establecer la bandera en true y redirigir
+              localStorage.setItem('dataReady', 'true');
+              window.location.href = "/Menu/EnsayoCustom";
+            }
+          }else{
+            alert("Debes seleccionar al menos dos tipos de ensayo, su tiempo y preguntas.")
+          }
+      }
+      else{
+        alert("Debes seleccionar al menos dos tipos de ensayo, su tiempo y preguntas.")
+      }   
   };
   
   return (
@@ -117,90 +131,90 @@ function CrearEnsayo() {
                   <div className="cantidadPreguntas-container">
                     <p><ArrowForwardIcon className="arrow-forward-icon"/>Cantidad de preguntas y tiempo</p>
                   <div className="formCheck">
-                    <div class="checkbox-container">
+                    <div className="checkbox-container">
                       <input
-                        class="form-check-input cantidadPreguntasInput"
+                        className="form-check-input cantidadPreguntasInput"
                         type="radio"
-                        id="20"
+                        id="36"
                         onChange={handleCantidadPreguntasChange}
-                        name="20preguntas"
-                        value={"20"}
+                        name="36preguntas"
+                        value={"36"}
                       ></input>
-                      <label class="form-check-label" for="20">
+                      <label className="form-check-label" htmlFor="36">
                       <ListIcon style={{color:"#a7a7a7", marginLeft:"10px", width:"30px", height:"30px", display:"flex",alignSelf:"center"}}/>
                       <div className="cantidadPreguntas">
                         
-                        <label class="form-check-label" for="20">
-                          20</label>
-                          <label class="form-check-label" for="20">
+                        <label className="form-check-label" htmlFor="36">
+                          36</label>
+                          <label className="form-check-label" htmlFor="36">
                           Preguntas</label>
                       </div>
                       <div className="separator"></div>
                       <AccessTimeIcon style={{color:"#a7a7a7", marginLeft:"10px", width:"30px", height:"30px",display:"flex",alignSelf:"center"}}/>
                       <div className="cantidadPreguntas">
                         
-                        <label class="form-check-label" for="20">
-                          40</label>
-                          <label class="form-check-label" for="20">
+                        <label className="form-check-label" htmlFor="36">
+                          72</label>
+                          <label className="form-check-label" htmlFor="36">
                           Minutos</label>
                       </div>
                       </label>
                     </div>
 
-                    <div class="checkbox-container">
+                    <div className="checkbox-container">
                       <input
-                        class="form-check-input cantidadPreguntasInput"
+                        className="form-check-input cantidadPreguntasInput"
                         type="radio"
-                        id="16"
+                        id="24"
                         onChange={handleCantidadPreguntasChange}
-                        name="16preguntas"
-                        value={"16"}
+                        name="24preguntas"
+                        value={"24"}
                       ></input>
-                      <label class="form-check-label" for="16">
+                      <label className="form-check-label" htmlFor="24">
                       <ListIcon style={{color:"#a7a7a7", marginLeft:"10px", width:"30px", height:"30px", display:"flex",alignSelf:"center"}}/>
                       <div className="cantidadPreguntas">
                         
-                        <label class="form-check-label" for="16">
-                          16</label>
-                          <label class="form-check-label" for="16">
+                        <label className="form-check-label" htmlFor="24">
+                          24</label>
+                          <label className="form-check-label" htmlFor="24">
                           Preguntas</label>
                       </div>
                       <div className="separator"></div>
                       <AccessTimeIcon style={{color:"#a7a7a7", marginLeft:"10px", width:"30px", height:"30px",display:"flex",alignSelf:"center"}}/>
                       <div className="cantidadPreguntas">
                         
-                        <label class="form-check-label" for="16">
-                          32</label>
-                          <label class="form-check-label" for="16">
+                        <label className="form-check-label" htmlFor="24">
+                          48</label>
+                          <label className="form-check-label" htmlFor="24">
                           Minutos</label>
                       </div>
                       </label>
                     </div>
-                    <div class="checkbox-container">
+                    <div className="checkbox-container">
                       <input
-                        class="form-check-input cantidadPreguntasInput"
+                        className="form-check-input cantidadPreguntasInput"
                         type="radio"
                         id="12"
                         onChange={handleCantidadPreguntasChange}
                         name="12preguntas"
                         value={"12"}
                       ></input>
-                      <label class="form-check-label" for="12">
+                      <label className="form-check-label" htmlFor="12">
                       <ListIcon style={{color:"#a7a7a7", marginLeft:"10px", width:"30px", height:"30px", display:"flex",alignSelf:"center"}}/>
                       <div className="cantidadPreguntas">
                         
-                        <label class="form-check-label" for="12">
+                        <label className="form-check-label" htmlFor="12">
                           12</label>
-                          <label class="form-check-label" for="12">
+                          <label className="form-check-label" htmlFor="12">
                           Preguntas</label>
                       </div>
                       <div className="separator"></div>
                       <AccessTimeIcon style={{color:"#a7a7a7", marginLeft:"10px", width:"30px", height:"30px",display:"flex",alignSelf:"center"}}/>
                       <div className="cantidadPreguntas">
                         
-                        <label class="form-check-label" for="12">
+                        <label className="form-check-label" htmlFor="12">
                           24</label>
-                          <label class="form-check-label" for="12">
+                          <label className="form-check-label" htmlFor="12">
                           Minutos</label>
                       </div>
                       </label>
@@ -211,10 +225,10 @@ function CrearEnsayo() {
                     
                   </div>
                   
-                <div className="formulario1">
+                {/* <div className="formulario1">
 
                         <form className="form">
-                            <p for="nombreEnsayo" className="mt-2">
+                            <p htmlFor="nombreEnsayo" className="mt-2">
                                 Nombre del ensayo
                             </p>
                             <input
@@ -229,7 +243,7 @@ function CrearEnsayo() {
                               </div>)}
                                   
                         </form>
-                  </div>
+                  </div> */}
                   
                   </div>
                   
@@ -242,35 +256,35 @@ function CrearEnsayo() {
                 <div className="Contenedor1">
                   <p><ArrowForwardIcon className="arrow-forward-icon"/>Elige eje PAES</p>
                   <div className="formCheck">
-                    <div class="checkbox-container checkbox-categoria">
+                    <div className="checkbox-container checkbox-categoria">
                       <input
-                        class="form-check-input categoria"
+                        className="form-check-input categoria"
                         type="checkbox"
                         id="1"
                         onChange={handleCheckBoxChange}
                         name="numeros"
                         value={"Numeros"}
                       ></input>
-                      <label class="form-check-label" for="1">
+                      <label className="form-check-label" htmlFor="1">
                         Numeros
                       </label>
                     </div>
-                    <div class="checkbox-container checkbox-categoria">
+                    <div className="checkbox-container checkbox-categoria">
                       <input
-                        class="form-check-input categoria"
+                        className="form-check-input categoria"
                         type="checkbox"
                         id="2"
                         onChange={handleCheckBoxChange}
                         name="Algebra"
                         value={"Algebra"}
                       ></input>
-                      <label class="form-check-label" for="2">
+                      <label className="form-check-label" htmlFor="2">
                         Algebra y funciones
                       </label>
                     </div>
-                    <div class="checkbox-container checkbox-categoria d-f">
+                    <div className="checkbox-container checkbox-categoria d-f">
                       <input
-                        class="form-check-input categoria"
+                        className="form-check-input categoria"
                         type="checkbox"
                         id="3"
                         onChange={handleCheckBoxChange}
@@ -278,20 +292,20 @@ function CrearEnsayo() {
                         value={"Geometria"}
                       
                       ></input>
-                      <label class="form-check-label" for="3">
+                      <label className="form-check-label" htmlFor="3">
                         Geometria
                       </label>
                     </div>
-                    <div class="checkbox-container checkbox-categoria">
+                    <div className="checkbox-container checkbox-categoria">
                       <input
-                        class="form-check-input categoria"
+                        className="form-check-input categoria"
                         type="checkbox"
                         id="4"
                         onChange={handleCheckBoxChange}
                         name="Probabilidades"
                         value={"Probabilidades"}
                       ></input>
-                      <label class="form-check-label" for="4">
+                      <label className="form-check-label" htmlFor="4">
                         Probabilidades y Estadistica
                       </label>
                     </div>
@@ -310,9 +324,9 @@ function CrearEnsayo() {
             <button className="botonQ btn btn-outline-dark m-1 " onClick={mostrarData} style={{width:"20%", height:"50px"}}> 
                       Realizar
             </button>  
-            <button className="botonQ btn btn-warning m-1 " style={{width:"20%", height:"50px"}}> 
+            {/* <button className="botonQ btn btn-warning m-1 " style={{width:"20%", height:"50px"}}> 
                       Guardar
-            </button>  
+            </button>   */}
           </div>  
         </div>
       </div>

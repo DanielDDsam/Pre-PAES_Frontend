@@ -4,27 +4,37 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Cookies from "universal-cookie";
 import TipsPAES from "./TipsPAES";
 import axios from "axios";
+import { Apiurl } from "../../Services/apirest";
 
 
 const cookies = new Cookies();
-const ApiurlGetIdEssayUser = "http://127.0.0.1:8000/submit_essay_user/";
+const ApiurlGetIdEssayUser = Apiurl + "custom_essays/";
 function NombreEnsayo(props) {
   const [showModal, setShowModal] = useState(false);
+  const [essay_ids, setEssay_ids] = useState([]);
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
   async function IniciarEnsayo(){
     const token = localStorage.getItem("token");
+    const essayId = parseInt(localStorage.getItem("user_id")) ;
+    setEssay_ids(props.idEnsayo)
     console.log("hola")
+    console.log(essayId)
+    
     try {
       const response = await axios.post(ApiurlGetIdEssayUser, {
-        essay_id: props.idEnsayo
+        essay_ids: [props.idEnsayo],
+        user: essayId,
+        name: props.temario, 
+        is_custom: false,
+        current_questions : 10
       }, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
-      localStorage.setItem("new_id",response.data.new_id);
+      localStorage.setItem("new_id",response.data.id);
       console.log(response.data);
       window.location.href = "./Menu/" + props.urlEnsayo;
     } catch (error) {
@@ -72,7 +82,7 @@ function NombreEnsayo(props) {
         
         </Modal.Header>
         <Modal.Body  >
-        <h2>{props.contentTitulo}</h2>
+        <h2>{props.temario}</h2>
               
                 <p className="modal-bodyText">{props.contentBody}</p>
         
