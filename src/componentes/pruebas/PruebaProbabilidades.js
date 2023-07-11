@@ -7,7 +7,7 @@ import axios from "axios";
 import Ensayo from "./Ensayo";
 import { Apiurl } from "../../Services/apirest";
 
-const ApiUrl = Apiurl + "questions_alternative/?subject=Probabilidades";
+const ApiUrl = Apiurl + "questions_alternative/?subject=probabilidades";
 
 function PruebaProbabilidades() {
   const [post, setPost] = React.useState(null);

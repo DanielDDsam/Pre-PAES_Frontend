@@ -7,13 +7,14 @@ import axios from "axios";
 import Ensayo from "./Ensayo";
 import { Apiurl } from "../../Services/apirest";
 
-const ApiUrl = Apiurl+"questions_alternative/?subject=Algebra";
+const ApiUrl = Apiurl+"questions_alternative/?subject=algebra";
 function PruebaAlgebra() {
   const [post, setPost] = React.useState(null);
 
   React.useEffect(() => {
     axios.get(ApiUrl).then((response) => {
       setPost(response.data);
+      console.log(response.data)
     });
   }, []);
   if (!post) return null;

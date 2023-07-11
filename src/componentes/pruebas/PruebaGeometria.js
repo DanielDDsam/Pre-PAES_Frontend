@@ -8,7 +8,7 @@ import Ensayo from "./Ensayo";
 import { Apiurl } from "../../Services/apirest";
 
 
-const ApiUrl = Apiurl+"questions_alternative/?subject=Geometria";
+const ApiUrl = Apiurl+"questions_alternative/?subject=geometria";
 function PruebaGeometria() {
   const [post, setPost] = React.useState(null);
 
