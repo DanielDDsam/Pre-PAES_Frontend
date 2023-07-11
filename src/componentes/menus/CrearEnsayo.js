@@ -275,7 +275,7 @@ function CrearEnsayo() {
                         type="checkbox"
                         id="2"
                         onChange={handleCheckBoxChange}
-                        name="Algebra"
+                        name="algebra"
                         value={"Algebra"}
                       ></input>
                       <label className="form-check-label" htmlFor="2">
@@ -288,7 +288,7 @@ function CrearEnsayo() {
                         type="checkbox"
                         id="3"
                         onChange={handleCheckBoxChange}
-                        name="Geometria"
+                        name="geometria"
                         value={"Geometria"}
                       
                       ></input>
@@ -302,7 +302,7 @@ function CrearEnsayo() {
                         type="checkbox"
                         id="4"
                         onChange={handleCheckBoxChange}
-                        name="Probabilidades"
+                        name="probabilidades"
                         value={"Probabilidades"}
                       ></input>
                       <label className="form-check-label" htmlFor="4">
