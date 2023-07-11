@@ -364,7 +364,7 @@ function Menu() {
                   score="error"
                   puntosTotal="10"
                   contentBody="Tendrá a su disposición 20 minutos para contestar el ensayo, podrá navegar entre preguntas y/o omitirlas."
-                  idEnsayo= {3}
+                  idEnsayo= {4}
                 />
                 
       
@@ -374,7 +374,7 @@ function Menu() {
                   urlEnsayo="PruebaProbabilidades"
                   score="error"
                   puntosTotal="5"
-                  idEnsayo= {4}
+                  idEnsayo= {3}
                   contentBody="Tendrá a su disposición 20 minutos para contestar el ensayo, podrá navegar entre preguntas y/o omitirlas."
                 />
                 

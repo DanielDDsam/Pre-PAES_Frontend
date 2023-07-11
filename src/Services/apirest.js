@@ -1,1 +1,1 @@
-export const Apiurl = "http://18.116.217.209:8000/";
+export const Apiurl = "https://prepaes-api.onrender.com/";

@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cookies from "universal-cookie";
+import logoPrePaes from "../../images/prepaesLogo.png"
 
 const cookies = new Cookies();
 function Navbar() {
@@ -26,10 +27,10 @@ function Navbar() {
       data-offset-top="30"
     >
       <div className="container-md">
-        <a className="navbar-brand" href="#">
-          <i className="bi bi-calculator"></i>
-          <span className="text-warning">Pre-PAES</span>
-        </a>
+      <a className="navbar-brand " href="#">
+                <img src={logoPrePaes} style={{width:'30px', marginRight:'0.3rem',marginTop:'-3px'}}/>
+                <span className="m-1"><span>Pre</span><span className='text-warning '>PAES</span></span> 
+                </a>
 
         <button
           className="navbar-toggler"
