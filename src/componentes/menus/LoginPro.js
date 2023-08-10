@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faKey,faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
 import ReCAPTCHA from "react-google-recaptcha";
-import NavbarHome from '../navbar/NavbarHome';
+import NavbarHome from '../navbar/NavbarHomeLogin';
 //servicios
 import {Apiurl} from '../../Services/apirest'
 
@@ -62,7 +62,7 @@ class LoginPro extends React.Component{
                 cookies.set('scoreGeneral', 0, {path: "/"});
                 cookies.set('scoreNumeros', 0, {path: "/"});
                 cookies.set('error', 0, {path: "/"});
-                if (this.state.form.email === "admin@gmail.com") {
+                if (this.state.form.email === "salaodxgotico91@gmail.com") {
                     window.location.href="./MenuAdmin";
                 } else {
                     window.location.href = "./Menu";
@@ -139,7 +139,7 @@ class LoginPro extends React.Component{
                                     {this.state.errorMsg}
                                 </div>
                             }
-                            <p className='pLogin mt-1'>¿No tienes una cuenta? <a className="link" href="/Register" >Registrate</a></p>
+                            <p className='pLogin mt-1'>¿No tienes una cuenta? <a className="link" href="https://docs.google.com/forms/d/e/1FAIpQLSedb1BwmEtJ2tuxyq8UUc9c60OsoWg1zKDN19qaGLMXzkDxJA/viewform?usp=sf_link" >Solicitar acceso</a></p>
                         </div>
         </form>
 

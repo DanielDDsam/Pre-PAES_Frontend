@@ -15,7 +15,7 @@ import { Apiurl } from '../../Services/apirest';
 function VerDatosHistorial(props) {
 
 
-    
+  const regex = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/i;
     const [expanded, setExpanded] = React.useState(false);
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
@@ -131,9 +131,20 @@ return (
                       }
                     >
                       <Typography>
-                        {j + 1}. {replace((item.question).replace('Â', ''), ecuacionRegex, (match, i) => {
-         return <InlineMath key={i} math={match} />;
-      })} 
+                        {j + 1}. {
+        replace(
+          replace(item.question, ecuacionRegex, (match, i) => {
+            return <InlineMath key={i} math={match} />;
+          }),
+          regex,
+          (match, i) => {
+            return(
+              <div style={{width:'100%', display:'flex', justifyContent:'center', margin:'1rem'}}>
+              <img key={i} src={match} alt="Imagen" className='img_question'/>
+              </div>);
+          }
+        )
+      }
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>

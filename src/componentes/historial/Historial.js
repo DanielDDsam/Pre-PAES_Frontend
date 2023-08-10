@@ -151,18 +151,7 @@ function Historial({items}) {
             setPaginaActual(paginaActual - 1);
         }
       }
-
-
-    
-    const fechaFormateada = (fecha) => {
-        const newFecha = moment(fecha).calendar(null, {
-            sameDay: '[hoy]',
-            lastDay: '[ayer]',
-            lastWeek: '[hace 1 semana] ',
-            sameElse: 'DD/MM/YYYY'
-          });
-        return newFecha;
-    }
+   
     // console.log(busquedaVacia)
 
     if(verMasConfirmado){

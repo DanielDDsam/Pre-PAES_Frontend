@@ -90,19 +90,43 @@ body::-webkit-scrollbar-thumb {
   margin: 5rem 0;
 }
 .hero-home {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   background-image: linear-gradient(180deg, #0000008c 0%, #0000008c 100%),
     url(./images/estudiando.jpg);
   background-size: cover;
   background-attachment: fixed;
-  height: 450px;
-  clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 95%, 0 80%);
+  height: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
 }
 .mask {
   background-color: rgba(0, 0, 0, 0.514) !important;
   position: relative;
+  max-width: 100%;
+ 
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
 }
 .boton-home {
-  border-color: black;
+  
+  font-weight: bold !important;
+  color: #2b2922 !important;
+  transition: all 0.3s ease-in-out !important;
+  background-color: #ffcd39 !important;
+}
+
+.boton-home:hover{
+  background-color: #ffcd39;
+  box-shadow: 0 0 13px rgba(255, 255, 255, 0.5);
+  transition: box-shadow 0.3s ease-in-out;
+
 }
 
 footer {
@@ -117,4 +141,76 @@ footer {
 
 .footercolor {
   background-color: rgba(0, 0, 0, 0.2);
+}
+
+
+.responsive-section {
+  padding: 40px 0;
+  margin-top: 6rem
+}
+
+.responsive-section .content {
+  padding-right: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.responsive-section h2 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.responsive-section p {
+  font-size: 16px;
+}
+
+.responsive-section .image img {
+  max-width: 80%;
+  height: auto;
+  border-radius: 0.5rem;
+
+}
+
+
+
+.marketing{
+  background-image: url("https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F56b24a0ed886439998c5e92b75fce660?width=2000");
+}
+
+
+.difficulty-bars {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.difficulty-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 30px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.difficulty-bar span {
+  margin-left: 10px;
+}
+
+.green {
+  background-color: #3cba54;
+}
+
+.yellow {
+  background-color: #f4c20d;
+}
+
+.red {
+  background-color: #db3236;
 }

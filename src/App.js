@@ -35,14 +35,14 @@ function App() {
           <Route path="/Menu" element={<Menu />} />
           <Route path="/Menu/Pregunta" element={<Pregunta />} />
           <Route path="/MenuAdmin" element={<MenuAdmin />} />
-          <Route path="/Menu/PruebaNumeros" element={<PruebaNumeros />} />
+          <Route path="/Menu/numeros" element={<PruebaNumeros />} />
           <Route path="/Menu/EnsayoCustom" element={<EnsayoCustom />} />
           <Route
-            path="/Menu/PruebaProbabilidades"
+            path="/Menu/probabilidades"
             element={<PruebaProbabilidades />}
           />
-          <Route path="/Menu/PruebaAlgebra" element={<PruebaAlgebra />} />
-          <Route path="/Menu/PruebaGeometria" element={<PruebaGeometria />} />
+          <Route path="/Menu/algebra" element={<PruebaAlgebra />} />
+          <Route path="/Menu/geometria" element={<PruebaGeometria />} />
           <Route path="/Menu/crearEnsayo" element={<CrearEnsayo />} />
           <Route
             path="/Admin/ModificarNumeros"

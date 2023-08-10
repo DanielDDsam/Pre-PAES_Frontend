@@ -16,7 +16,7 @@ function NavbarAdmin() {
     if (!cookies.get("username") )  {
       window.location.href = "/Login";
     }
-    if(cookies.get("username") !== "admin@gmail.com" ){
+    if(cookies.get("username") !== "salaodxgotico91@gmail.com" ){
       window.location.href = "/Menu";
     }
   }

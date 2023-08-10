@@ -76,6 +76,7 @@ function Ensayo(props) {
   JSON.parse(localStorage.getItem("selectedAnswers"))||{});
 
   const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}\]";
+  const regex = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/i;
   const ecuacionRegex = /\[(.*?)\]/g; // Expresión regular para detectar partes de la cadena que contienen ecuaciones
   const [tiempoUsuario, setTiempoUsuario] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
@@ -384,9 +385,21 @@ function Ensayo(props) {
                       }
                     >
                       <Typography>
-                        {j + 1}. {replace((item.question).replace('Â', ''), ecuacionRegex, (match, i) => {
-         return <InlineMath key={i} math={match} />;
-      })} 
+                        {j + 1}. 
+      {
+        replace(
+          replace(item.question, ecuacionRegex, (match, i) => {
+            return <InlineMath key={i} math={match} />;
+          }),
+          regex,
+          (match, i) => {
+            return(
+              <div style={{width:'100%', display:'flex', justifyContent:'center', margin:'1rem'}}>
+              <img key={i} src={match} alt="Imagen" className='img_question'/>
+              </div>);
+          }
+        )
+      }
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -488,9 +501,21 @@ function Ensayo(props) {
           </Box>
           <h3 className="enunciado-pregunta  ">
           <div>
-      {replace((ensayo[preguntaActual].question).replace('Â', ''), ecuacionRegex, (match, i) => {
-         return <InlineMath key={i} math={match} />;
-      })}
+      {
+        replace(
+          replace(ensayo[preguntaActual].question, ecuacionRegex, (match, i) => {
+            return <InlineMath key={i} math={match} />;
+          }),
+          regex,
+          (match, i) => {
+            return(
+              <div style={{width:'100%', display:'flex', justifyContent:'center', margin:'1rem'}}>
+              <img key={i} src={match} alt="Imagen" className='img_question'/>
+              </div>);
+          }
+        )
+      }
+      
     </div>
           </h3>
           {ensayo[preguntaActual].answer.map((respuesta, idk) => (

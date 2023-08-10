@@ -6,41 +6,13 @@ import { faCalculator } from '@fortawesome/free-solid-svg-icons'
 import logoPrePaes from "../../images/prepaesLogo.png"
 
 const cookies = new Cookies();
-function NavbarHome(props) {
-    const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.pageYOffset;
-      if (scrollTop > 90 && !isScrolled) {
-        setIsScrolled(true);
-      } else if (scrollTop < 89 && isScrolled) {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [isScrolled]);
+function NavbarHomeLogin(props) {
+   
 
 
     return (
        
-        <nav
-      className={`navbar sticky-top navbar-expand-md navbar-dark ${
-        isScrolled ? 'bg-dark' : ''
-      }`}
-      data-spy="affix"
-      style={{
-        backgroundColor: 'transparent',
-        fontSize: '19px',
-        transition: 'background-color 0.25s ease-in-out', // Transición suave
-      }}
-      data-offset-top="30"
-    >
+      <nav className="navbar sticky-top navbar-expand-md navbar-dark bg-dark" data-spy="affix" data-offset-top="30" style={{fontSize:'18px '}} >
             <div className="container-md">
                 <a className="navbar-brand " href="#">
                 <img src={logoPrePaes} style={{width:'33px', marginRight:'0.3rem',marginTop:'-5px'}}/>
@@ -74,4 +46,4 @@ function NavbarHome(props) {
     );
 }
 
-export default NavbarHome;
+export default NavbarHomeLogin;

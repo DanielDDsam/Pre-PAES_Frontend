@@ -18,7 +18,7 @@ const AñadirPreguntas = () => {
     const [answer4, setAnswer4] = useState({ label: "", right: "" });
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [formError, setFormError] = useState(false);
-
+    const regex = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/i;
 
     const ecuacionRegex = /\[(.*?)\]/g; // Expresión regular para detectar partes de la cadena que contienen ecuaciones
 
@@ -28,11 +28,11 @@ const AñadirPreguntas = () => {
             setFormError(true); // Establecer el estado de formError a true si algún campo está vacío
             setTimeout(() => {
                 setFormError(false);
-              }, 2000); // Desaparecer el mensaje después de 2 segundos
+            }, 2000); // Desaparecer el mensaje después de 2 segundos
             return; // Si falta algún campo, no se envía el formulario
-          }
-      
-          setFormError(false); // Establecer el estado de formError a false antes de enviar el formulario
+        }
+
+        setFormError(false); // Establecer el estado de formError a false antes de enviar el formulario
         const questionData = { question, subject, link_resolution: linkResolution };
         const response = await axios.post(urlCreateQuestion, questionData);
         const questionId = response.data.id;
@@ -45,180 +45,211 @@ const AñadirPreguntas = () => {
         setFormSubmitted(true); // Establecer el estado de formSubmitted a true después de enviar el formulario
         setTimeout(() => {
             setFormSubmitted(false);
-          }, 2000); // Desaparecer el mensaje después de 2 segundos
+        }, 2000); // Desaparecer el mensaje después de 2 segundos
     };
     const handleClosePopup = () => {
         setShowPopup(false);
-      };
+    };
 
     return (
         <>
-        <div className='contenedorPrincipal'>
-            
-            <form onSubmit={handleSubmit}>
-                <div className="form-group mb-2" >
-                    <label htmlFor="question" className='mb-2'>Pregunta:</label>
-                    <textarea className="form-control" id="question" name="question" value={question} onChange={(e) => setQuestion(e.target.value)}></textarea>
-                </div>
+            <div className='contenedorPrincipal'>
 
-                <div className="form-group mb-2" >
-                    <label htmlFor="subject"  className='mb-2'>Categoría:</label>
-                    <select className="form-control" id="subject" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)}>
-                        <option value="">Seleccione una categoría</option>
-                        <option value="numeros">Números</option>
-                        <option value="algebra">Álgebra</option>
-                        <option value="probabilidades">Probabilidades</option>
-                        <option value="geometria">Geometría</option>
-                    </select>
-                </div>
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group mb-2" >
+                        <label htmlFor="question" className='mb-2'>Pregunta:</label>
+                        <textarea className="form-control" id="question" name="question" value={question} onChange={(e) => setQuestion(e.target.value)}></textarea>
+                    </div>
 
-                <div className="form-group mb-2">
-                    <label htmlFor="linkResolution"  className='mb-2'>Enlace de video resolución:</label>
-                    <input type="search" className="form-control" id="linkResolution" name="linkResolution" value={linkResolution} onChange={(e) => setLinkResolution(e.target.value)} />
-                </div>
+                    <div className="form-group mb-2" >
+                        <label htmlFor="subject" className='mb-2'>Categoría:</label>
+                        <select className="form-control" id="subject" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)}>
+                            <option value="">Seleccione una categoría</option>
+                            <option value="numeros">Números</option>
+                            <option value="algebra">Álgebra</option>
+                            <option value="probabilidades">Probabilidades</option>
+                            <option value="geometria">Geometría</option>
+                        </select>
+                    </div>
 
-                <div className="form-group mt-4">
-               
-                    <div className="row">
-                        <div className="col-1 " style={{display:"grid", placeContent:"center",fontSize:"20px", fontWeight:"bold"}}>A</div>
-                        <div className="col">
-                            <input type="search" className="form-control" name="label" value={answer1.label} onChange={(e) => setAnswer1({ ...answer1, label: e.target.value })} />
-                        </div>
-                        <div className="col">
-                            <select className="form-control" name="right" value={answer1.right} onChange={(e) => setAnswer1({ ...answer1, right: e.target.value })}>
-                                <option value="">Seleccione</option>
-                                <option value="1">Verdadera</option>
-                                <option value="0">Falsa</option>
-                            </select>
+                    <div className="form-group mb-2">
+                        <label htmlFor="linkResolution" className='mb-2'>Enlace de video resolución:</label>
+                        <input type="search" className="form-control" id="linkResolution" name="linkResolution" value={linkResolution} onChange={(e) => setLinkResolution(e.target.value)} />
+                    </div>
+
+                    <div className="form-group mt-4">
+
+                        <div className="row">
+                            <div className="col-1 " style={{ display: "grid", placeContent: "center", fontSize: "20px", fontWeight: "bold" }}>A</div>
+                            <div className="col">
+                                <input type="search" className="form-control" name="label" value={answer1.label} onChange={(e) => setAnswer1({ ...answer1, label: e.target.value })} />
+                            </div>
+                            <div className="col">
+                                <select className="form-control" name="right" value={answer1.right} onChange={(e) => setAnswer1({ ...answer1, right: e.target.value })}>
+                                    <option value="">Seleccione</option>
+                                    <option value="1">Verdadera</option>
+                                    <option value="0">Falsa</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="form-group mt-3">
-              
-                    <div className="row">
-                        <div className="col-1" style={{display:"grid", placeContent:"center",fontSize:"20px", fontWeight:"bold"}}>B</div>
-                        <div className="col">
-                            <input type="search" className="form-control" name="label" value={answer2.label} onChange={(e) => setAnswer2({ ...answer2, label: e.target.value })} />
-                        </div>
-                        <div className="col">
-                            <select className="form-control" name="right" value={answer2.right} onChange={(e) => setAnswer2({ ...answer2, right: e.target.value })}>
-                                <option value="">Seleccione</option>
-                                <option value="1">Verdadera</option>
-                                <option value="0">Falsa</option>
-                            </select>
+                    <div className="form-group mt-3">
+
+                        <div className="row">
+                            <div className="col-1" style={{ display: "grid", placeContent: "center", fontSize: "20px", fontWeight: "bold" }}>B</div>
+                            <div className="col">
+                                <input type="search" className="form-control" name="label" value={answer2.label} onChange={(e) => setAnswer2({ ...answer2, label: e.target.value })} />
+                            </div>
+                            <div className="col">
+                                <select className="form-control" name="right" value={answer2.right} onChange={(e) => setAnswer2({ ...answer2, right: e.target.value })}>
+                                    <option value="">Seleccione</option>
+                                    <option value="1">Verdadera</option>
+                                    <option value="0">Falsa</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="form-group mt-3">
-            
-                    <div className="row">
-                        <div className="col-1" style={{display:"grid", placeContent:"center",fontSize:"20px", fontWeight:"bold"}}>C</div>
-                        <div className="col">
-                            <input type="search" className="form-control" name="label" value={answer3.label} onChange={(e) => setAnswer3({ ...answer3, label: e.target.value })} />
-                        </div>
-                        <div className="col">
-                            <select className="form-control" name="right" value={answer3.right} onChange={(e) => setAnswer3({ ...answer3, right: e.target.value })}>
-                                <option value="">Seleccione</option>
-                                <option value="1">Verdadera</option>
-                                <option value="0">Falsa</option>
-                            </select>
+                    <div className="form-group mt-3">
+
+                        <div className="row">
+                            <div className="col-1" style={{ display: "grid", placeContent: "center", fontSize: "20px", fontWeight: "bold" }}>C</div>
+                            <div className="col">
+                                <input type="search" className="form-control" name="label" value={answer3.label} onChange={(e) => setAnswer3({ ...answer3, label: e.target.value })} />
+                            </div>
+                            <div className="col">
+                                <select className="form-control" name="right" value={answer3.right} onChange={(e) => setAnswer3({ ...answer3, right: e.target.value })}>
+                                    <option value="">Seleccione</option>
+                                    <option value="1">Verdadera</option>
+                                    <option value="0">Falsa</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="form-group mt-3">
-          
-                    <div className="row">
-                        <div className="col-1" style={{display:"grid", placeContent:"center",fontSize:"20px", fontWeight:"bold"}}>D</div>
-                        <div className="col">
-                            <input type="search" className="form-control" name="label" value={answer4.label} onChange={(e) => setAnswer4({ ...answer4, label: e.target.value })} />
-                        </div>
-                        <div className="col">
-                            <select className="form-control" name="right" value={answer4.right} onChange={(e) => setAnswer4({ ...answer4, right: e.target.value })}>
-                                <option value="">Seleccione</option>
-                                <option value="1">Verdadera</option>
-                                <option value="0">Falsa</option>
-                            </select>
+                    <div className="form-group mt-3">
+
+                        <div className="row">
+                            <div className="col-1" style={{ display: "grid", placeContent: "center", fontSize: "20px", fontWeight: "bold" }}>D</div>
+                            <div className="col">
+                                <input type="search" className="form-control" name="label" value={answer4.label} onChange={(e) => setAnswer4({ ...answer4, label: e.target.value })} />
+                            </div>
+                            <div className="col">
+                                <select className="form-control" name="right" value={answer4.right} onChange={(e) => setAnswer4({ ...answer4, right: e.target.value })}>
+                                    <option value="">Seleccione</option>
+                                    <option value="1">Verdadera</option>
+                                    <option value="0">Falsa</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
-                {formError && (
-                <div className="alert alert-danger mt-4" role="alert">
-                    Todos los campos son necesarios.
-                </div>
-                )}
-                {formSubmitted && (
-                    <div className="alert alert-success mt-4" role="alert">
-                    ¡El formulario se ha enviado correctamente!
-                    </div>
-                )}
-                <button type="submit" className="btn  btn-warning mb-2 p-2 mt-4  ">Añadir Pregunta</button>
-                <button type="button" onClick={()=>{setShowPopup(true)}} className="btn  btn-dark mb-2 p-2 mt-4 " style={{marginLeft:"1rem"}}>Visualizar</button>
-            </form>
-            
-        </div>
+                    {formError && (
+                        <div className="alert alert-danger mt-4" role="alert">
+                            Todos los campos son necesarios.
+                        </div>
+                    )}
+                    {formSubmitted && (
+                        <div className="alert alert-success mt-4" role="alert">
+                            ¡El formulario se ha enviado correctamente!
+                        </div>
+                    )}
+                    <button type="submit" className="btn  btn-warning mb-2 p-2 mt-4  ">Añadir Pregunta</button>
+                    <button type="button" onClick={() => { setShowPopup(true) }} className="btn  btn-dark mb-2 p-2 mt-4 " style={{ marginLeft: "1rem" }}>Visualizar</button>
+                </form>
 
-        {showPopup && (
-            <div className='popup'>
-             
-        
-      <div className="contenedor-principal position-relative " style={{width:"900px"}}>     
-        <div className="contenedor-pregunta">
-            <div className="row ">
-                <div className="col-md-11 mt-3">
-                    <h3>
-                        Pregunta 1 de 10
-                    </h3>
-                </div>    
             </div>
-          <h3 className="enunciado-pregunta  ">
-          <div>
-      {replace(question, ecuacionRegex, (match, i) => {
-         return <InlineMath key={i} math={match} />;
-      })}
-    </div>
-          </h3>
-         
-            <button type="button" className="contenedor-alternativa-pregunta">
-                <b>{"A. "}</b>
-                {replace(answer1.label, ecuacionRegex, (match, i) => {
-                    return <InlineMath  math={match} />;
-                })}
-            </button>
-            <button type="button" className="contenedor-alternativa-pregunta">
-                <b>{"B. "}</b>
-                {replace(answer2.label, ecuacionRegex, (match, i) => {
-                    return <InlineMath  math={match} />;
-                })}
-            </button>
-            <button type="button" className="contenedor-alternativa-pregunta">
-                <b>{"C. "}</b>
-                {replace(answer3.label, ecuacionRegex, (match, i) => {
-                    return <InlineMath  math={match} />;
-                })}
-            </button>
-            <button type="button" className="contenedor-alternativa-pregunta">
-                <b>{"D. "}</b>
-                {replace(answer4.label, ecuacionRegex, (match, i) => {
-                    return <InlineMath  math={match} />;
-                })}
-            </button>
-      
-            <div className="sumaResta">
-                <a className="arrow left" ></a>
-                <a className="arrow right"></a>
-            </div>
-            <button onClick={()=>{setShowPopup(false)}} className="btn  btn-dark mb-2 p-2 mt-4 " style={{marginLeft:"1rem"}}>Cerrar</button>
-            </div>
-                      
+
+            {showPopup && (
+                <div className='popup'>
+                    <div className='popup-inner'>
+
+                        <div className="contenedor-principal position-relative " style={{ width: "900px" }}>
+                            <div className="contenedor-pregunta">
+                                <div className="row ">
+                                    <div className="col-md-11 mt-3">
+                                        <h3>
+                                            Pregunta 1 de 10
+                                        </h3>
+                                    </div>
+                                </div>
+                                <h3 className="enunciado-pregunta  ">
+                                    <div>
+                                        {
+                                            replace(
+                                                replace(question, ecuacionRegex, (match, i) => {
+                                                    return <InlineMath key={i} math={match} />;
+                                                }),
+                                                regex,
+                                                (match, i) => {
+                                                    return (
+                                                        <div style={{ width: '100%', display: 'flex', justifyContent: 'center', margin: '1rem' }}>
+                                                            <img key={i} src={match} alt="Imagen" className='img_question' />
+                                                        </div>);
+                                                }
+                                            )
+                                        }
+                                    </div>
+                                </h3>
+
+                                <button type="button" className="contenedor-alternativa-pregunta">
+                                    <div className='' style={{ display: 'flex', gap: '12px' }}>
+                                        <span >A)</span>
+                                        <span>
+                                            {replace(answer1.label, ecuacionRegex, (match, i) => {
+                                                return <InlineMath math={match} />;
+                                            })}
+                                        </span>
+                                    </div>
+
+
+                                </button>
+                                <button type="button" className="contenedor-alternativa-pregunta">
+                                    <div className='' style={{ display: 'flex', gap: '12px' }}>
+                                        <span>B)</span>
+                                        <span>
+                                            {replace(answer2.label, ecuacionRegex, (match, i) => {
+                                                return <InlineMath math={match} />;
+                                            })}
+                                        </span>
+                                    </div>
+                                </button>
+                                <button type="button" className="contenedor-alternativa-pregunta">
+                                    <div className='' style={{ display: 'flex', gap: '12px' }}>
+                                        <span>C)</span>
+                                        <span>
+
+
+                                            {replace(answer3.label, ecuacionRegex, (match, i) => {
+                                                return <InlineMath math={match} />;
+                                            })}
+                                        </span>
+                                    </div>
+                                </button>
+                                <button type="button" className="contenedor-alternativa-pregunta">
+                                    <div className='' style={{ display: 'flex', gap: '12px' }}>
+                                        <span>D)</span>
+                                        <span>
+                                            {replace(answer4.label, ecuacionRegex, (match, i) => {
+                                                return <InlineMath math={match} />;
+                                            })}
+                                        </span>
+                                    </div>
+                                </button>
+
+                                <div className="sumaResta">
+                                    <a className="arrow left" ></a>
+                                    <a className="arrow right"></a>
+                                </div>
+                                <button onClick={() => { setShowPopup(false) }} className="btn  btn-dark mb-2 p-2 mt-4 " style={{ marginLeft: "1rem" }}>Cerrar</button>
+                            </div>
+
                         </div>
-                        
                     </div>
-                    
-  
-        )}
+                </div>
+
+
+            )}
 
         </>
 
